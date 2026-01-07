@@ -2,6 +2,9 @@
 
 namespace Vinpay.Utils
 {
+    /// <summary>
+    /// 字符串操作工具类
+    /// </summary>
     public static class StringUtil
     {
         /// <summary>

@@ -12,4 +12,14 @@
     <TestingPlatformShowTestsFailure>true</TestingPlatformShowTestsFailure>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Vinpay.Utils\Vinpay.Utils.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\md5_input.bin">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

@@ -17,6 +17,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinpay.Utils", "Vinpay.Util
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinpay.Utils.Test", "UnitTests\Vinpay.Utils.Test\Vinpay.Utils.Test.csproj", "{8F2031D2-BB20-AE97-F98D-E16A39707DA2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Samples", "Samples", "{5F271A31-0E40-44A3-9776-4A5E3F4F5A80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinpay.Samples.Win", "Samples\Vinpay.Samples.Win\Vinpay.Samples.Win.csproj", "{2CCAD8A7-DC8F-419F-ABD6-9ACBDE786D46}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vinpay.Samples.Wpf", "Samples\Vinpay.Samples.Wpf\Vinpay.Samples.Wpf.csproj", "{9D78E93C-DDBA-4F20-8D2E-3F31C148C28C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +53,14 @@ Global
 		{8F2031D2-BB20-AE97-F98D-E16A39707DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F2031D2-BB20-AE97-F98D-E16A39707DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F2031D2-BB20-AE97-F98D-E16A39707DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CCAD8A7-DC8F-419F-ABD6-9ACBDE786D46}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CCAD8A7-DC8F-419F-ABD6-9ACBDE786D46}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CCAD8A7-DC8F-419F-ABD6-9ACBDE786D46}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CCAD8A7-DC8F-419F-ABD6-9ACBDE786D46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D78E93C-DDBA-4F20-8D2E-3F31C148C28C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D78E93C-DDBA-4F20-8D2E-3F31C148C28C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D78E93C-DDBA-4F20-8D2E-3F31C148C28C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D78E93C-DDBA-4F20-8D2E-3F31C148C28C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,6 +69,8 @@ Global
 		{DE843F9A-134B-415C-9EFE-F45E9E33515C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{65763AE8-04BA-BAB2-76FC-71D30877470D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{8F2031D2-BB20-AE97-F98D-E16A39707DA2} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2CCAD8A7-DC8F-419F-ABD6-9ACBDE786D46} = {5F271A31-0E40-44A3-9776-4A5E3F4F5A80}
+		{9D78E93C-DDBA-4F20-8D2E-3F31C148C28C} = {5F271A31-0E40-44A3-9776-4A5E3F4F5A80}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6ACD7485-28E4-4828-B051-2E037FF66F68}

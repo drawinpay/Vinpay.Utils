@@ -5,7 +5,7 @@ namespace Vinpay.Utils.Win
     /// <summary>
     /// A util to deal with file name issues.
     /// </summary>
-    public static class FileNameUtil
+    public static class FileNameValidator
     {
         private static readonly char[] IllegalStrings =
         {

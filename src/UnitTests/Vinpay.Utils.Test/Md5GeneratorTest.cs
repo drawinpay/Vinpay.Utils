@@ -3,7 +3,7 @@
 namespace Vinpay.Utils.Test
 {
     [TestClass]
-    public sealed class Md5UtilTest
+    public sealed class Md5GeneratorTest
     {
         private byte[] input =
         [

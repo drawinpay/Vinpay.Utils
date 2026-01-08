@@ -5,7 +5,7 @@ namespace Vinpay.Utils
     /// <summary>
     /// A util to convert data size.
     /// </summary>
-    public static class DataSizeConvertUtil
+    public static class DataSizeConverter
     {
         #region Consts
 

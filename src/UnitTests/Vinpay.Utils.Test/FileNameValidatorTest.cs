@@ -3,7 +3,7 @@ using Vinpay.Utils.Win;
 namespace Vinpay.Utils.Test;
 
 [TestClass]
-public class FileNameUtilTest
+public class FileNameValidatorTest
 {
     [TestMethod]
     [DataRow("F/ileName", false)]

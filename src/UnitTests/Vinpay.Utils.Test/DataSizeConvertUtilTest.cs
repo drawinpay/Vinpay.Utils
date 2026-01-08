@@ -1,7 +1,7 @@
 ﻿namespace Vinpay.Utils.Test
 {
     [TestClass]
-    public class DataSizeConvertUtilTest
+    public class DataSizeConverterTest
     {
         [TestMethod]
         [DataRow(1024, 1)]

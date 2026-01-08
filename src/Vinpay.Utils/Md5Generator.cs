@@ -6,7 +6,7 @@ namespace Vinpay.Utils
     /// <summary>
     /// A util to calculate MD5 hash.
     /// </summary>
-    public static class Md5Util
+    public static class Md5Generator
     {
         #region Public Methods
 

@@ -1,7 +1,7 @@
 ﻿namespace Vinpay.Utils.Test
 {
     [TestClass]
-    public class BinaryDataParserTest
+    public class ByteDataConverterTest
     {
         [TestMethod]
         [DataRow("45149C63ECAAC3E740D46FE6D65BC684")]
@@ -14,7 +14,7 @@
                 0x45, 0x14, 0x9C, 0x63, 0xEC, 0xAA, 0xC3, 0xE7, 0x40, 0xD4, 0x6F, 0xE6, 0xD6, 0x5B, 0xC6, 0x84
             ];
 
-            byte[] output = BinaryDataParser.ParseHexString(input);
+            byte[] output = ByteDataConverter.ParseHexString(input);
 
             Assert.AreEqual(result.Length, output.Length);
             for (int i = 0; i < result.Length; i++)
@@ -30,7 +30,7 @@
         {
             Assert.ThrowsException<ArgumentException>(() =>
             {
-                byte[] output = BinaryDataParser.ParseHexString(input);
+                byte[] output = ByteDataConverter.ParseHexString(input);
             });
         }
         [TestMethod]
@@ -46,7 +46,7 @@
                 0x45, 0x14, 0x9C, 0x63, 0xEC, 0xAA, 0xC3, 0xE7, 0x40, 0xD4, 0x6F, 0xE6, 0xD6, 0x5B, 0xC6, 0x84
             ];
 
-            byte[] output = BinaryDataParser.ParseHexString(input, separator);
+            byte[] output = ByteDataConverter.ParseHexString(input, separator);
 
             Assert.AreEqual(result.Length, output.Length);
             for (int i = 0; i < result.Length; i++)
@@ -55,5 +55,21 @@
             }
         }
 
+        [TestMethod]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, " ", true, "35 47 b5 97 ce")]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, "", true, "3547b597ce")]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, "-", true, "35-47-b5-97-ce")]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, " 0x", true, "35 0x47 0xb5 0x97 0xce")]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, " ", false, "35 47 B5 97 CE")]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, "", false, "3547B597CE")]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, "-", false, "35-47-B5-97-CE")]
+        [DataRow(new byte[] { 0x35, 0x47, 0xB5, 0x97, 0xCE }, " 0x", false, "35 0x47 0xB5 0x97 0xCE")]
+        [DataRow(new byte[] { 53, 71, 181, 151, 206 }, " ", true, "35 47 b5 97 ce")]
+        [DataRow(new byte[] { 53, 71, 181, 151, 206 }, " ", false, "35 47 B5 97 CE")]
+        public void BytesToHexStringTest(byte[] data, string separator, bool isLowerCase, string result)
+        {
+            string output = data.BytesToHexString(separator, isLowerCase);
+            Assert.AreEqual(result, output);
+        }
     }
 }

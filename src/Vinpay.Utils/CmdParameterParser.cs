@@ -50,9 +50,9 @@
         public static Dictionary<string, List<string>> Parse(string[] args)
         {
             var groupedArgs = new Dictionary<string, List<string>>();
-            if (args.Length == 0)
+            if (args == null || args.Length == 0)
             {
-                throw new ArgumentException("The length of input args cannot be 0.");
+                throw new ArgumentException("The input args cannot be null or empty.");
             }
 
             int firstKeyIndex = FindFirstKeyIndex(args, 0);
@@ -93,11 +93,11 @@
 
                 if (argCount > 0)
                 {
-                    groupedArgs.Add(args[currentKeyIndex].Substring(1), args.Skip(currentKeyIndex + 1).Take(argCount).ToList());
+                    groupedArgs.Add(key, args.Skip(currentKeyIndex + 1).Take(argCount).ToList());
                 }
                 else
                 {
-                    groupedArgs.Add(args[currentKeyIndex].Substring(1), new List<string>());
+                    groupedArgs.Add(key, new List<string>());
                 }
 
                 if (nextKeyIndex > 0)

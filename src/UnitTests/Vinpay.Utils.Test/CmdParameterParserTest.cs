@@ -1,6 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Vinpay.Utils;
-
 namespace Vinpay.Utils.Test;
 
 /// <summary>
@@ -272,7 +269,7 @@ public class CmdParameterParserTest
     /// Test Parse with null array
     /// </summary>
     [TestMethod]
-    [ExpectedException(typeof(NullReferenceException))]
+    [ExpectedException(typeof(ArgumentException))]
     public void Parse_Array_NullInput_ThrowsException()
     {
         CmdParameterParser.Parse((string[])null!);
@@ -474,17 +471,27 @@ public class CmdParameterParserTest
         Assert.AreEqual("key1", keys[1]);
         Assert.AreEqual("key2", keys[2]);
     }
-    S
+
     /// <summary>
-    /// Test Parse with single dash value
+    /// Test Parse with values that look like keys
     /// </summary>
     [TestMethod]
-    public void Parse_Array_SingleDashValue_TreatedAsKey()
+    public void Parse_Array_ValuesLookLikeKeys_TreatedAsValues()
     {
-        var result = CmdParameterParser.Parse(new[] { "-", "value" });
+        var result = CmdParameterParser.Parse(new[] { "-key", "-value" });
 
         Assert.AreEqual(1, result.Count);
-        CollectionAssert.AreEqual(new List<string> { "value" }, result[""]);
+        CollectionAssert.AreEqual(new List<string> { "-value" }, result["key"]);
+    }
+
+    /// <summary>
+    /// Test Parse with single dash key
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void Parse_Array_SingleDashKey_ThrowsException()
+    {
+        CmdParameterParser.Parse(new[] { "-", "value" });
     }
 
     /// <summary>
@@ -654,11 +661,10 @@ public class CmdParameterParserTest
     /// Test Parse with key name that is empty after removing dash
     /// </summary>
     [TestMethod]
-    public void Parse_EdgeCase_KeyNameEmptyAfterDash_EmptyStringKey()
+    [ExpectedException(typeof(ArgumentException))]
+    public void Parse_EdgeCase_KeyNameEmptyAfterDash_ThrowsException()
     {
-        var result = CmdParameterParser.Parse(new[] { "-", "value" });
-        Assert.AreEqual(1, result.Count);
-        CollectionAssert.AreEqual(new List<string> { "value" }, result[""]);
+        CmdParameterParser.Parse(new[] { "-", "value" });
     }
 
     #endregion

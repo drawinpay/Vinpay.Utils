@@ -486,11 +486,21 @@ public class CmdParameterParserTest
     }
 
     /// <summary>
-    /// Test Parse with single dash key
+    /// Test Parse with single dash key only (no value)
     /// </summary>
     [TestMethod]
     [ExpectedException(typeof(ArgumentException))]
-    public void Parse_Array_SingleDashKey_ThrowsException()
+    public void Parse_Array_SingleDashOnly_ThrowsException()
+    {
+        CmdParameterParser.Parse(new[] { "-" });
+    }
+
+    /// <summary>
+    /// Test Parse with single dash key with value
+    /// </summary>
+    [TestMethod]
+    [ExpectedException(typeof(ArgumentException))]
+    public void Parse_Array_SingleDashKeyWithValue_ThrowsException()
     {
         CmdParameterParser.Parse(new[] { "-", "value" });
     }
@@ -512,38 +522,7 @@ public class CmdParameterParserTest
 
     #region Edge Cases and Boundary Tests
 
-    /// <summary>
-    /// Test Parse with only one key
-    /// </summary>
-    [TestMethod]
-    public void Parse_EdgeCase_OnlySingleKey_ReturnsEmptyList()
-    {
-        var result = CmdParameterParser.Parse(new[] { "-key" });
-        Assert.AreEqual(1, result.Count);
-        CollectionAssert.AreEqual(new List<string>(), result["key"]);
-    }
 
-    /// <summary>
-    /// Test Parse with one value only
-    /// </summary>
-    [TestMethod]
-    public void Parse_EdgeCase_OnlySingleValue_ReturnsDefaultKey()
-    {
-        var result = CmdParameterParser.Parse(new[] { "value" });
-        Assert.AreEqual(1, result.Count);
-        CollectionAssert.AreEqual(new List<string> { "value" }, result[""]);
-    }
-
-    /// <summary>
-    /// Test Parse with key at index 0
-    /// </summary>
-    [TestMethod]
-    public void Parse_EdgeCase_KeyAtIndex0_NoDefaultValues()
-    {
-        var result = CmdParameterParser.Parse(new[] { "-key", "value" });
-        Assert.IsFalse(result.ContainsKey(""));
-        Assert.IsTrue(result.ContainsKey("key"));
-    }
 
     /// <summary>
     /// Test Parse with key at last index
@@ -666,6 +645,78 @@ public class CmdParameterParserTest
     public void Parse_EdgeCase_KeyNameEmptyAfterDash_ThrowsException()
     {
         CmdParameterParser.Parse(new[] { "-", "value" });
+    }
+
+    /// <summary>
+    /// Test Parse with triple dash key
+    /// </summary>
+    [TestMethod]
+    public void Parse_EdgeCase_TripleDashKey_RemovesFirstDash()
+    {
+        var result = CmdParameterParser.Parse(new[] { "---key", "value" });
+        Assert.AreEqual(1, result.Count);
+        CollectionAssert.AreEqual(new List<string> { "value" }, result["--key"]);
+    }
+
+    /// <summary>
+    /// Test Parse with value containing dash but not starting with dash
+    /// </summary>
+    [TestMethod]
+    public void Parse_EdgeCase_ValueWithDashNotStartingWithDash_TreatedAsValue()
+    {
+        var result = CmdParameterParser.Parse(new[] { "-key", "value-with-dash", "another-value" });
+        Assert.AreEqual(1, result.Count);
+        CollectionAssert.AreEqual(new List<string> { "value-with-dash", "another-value" }, result["key"]);
+    }
+
+    /// <summary>
+    /// Test Parse with mixed case keys
+    /// </summary>
+    [TestMethod]
+    public void Parse_EdgeCase_MixedCaseKeys_KeysAreCaseSensitive()
+    {
+        var result = CmdParameterParser.Parse(new[] { "-Key", "-key", "-KEY", "value" });
+        Assert.AreEqual(3, result.Count);
+        CollectionAssert.AreEqual(new List<string>(), result["Key"]);
+        CollectionAssert.AreEqual(new List<string>(), result["key"]);
+        CollectionAssert.AreEqual(new List<string> { "value" }, result["KEY"]);
+    }
+
+    /// <summary>
+    /// Test Parse with Unicode characters in key
+    /// </summary>
+    [TestMethod]
+    public void Parse_EdgeCase_UnicodeInKey_TreatedCorrectly()
+    {
+        var result = CmdParameterParser.Parse(new[] { "-键名", "值", "-αβγ", "test" });
+        Assert.AreEqual(2, result.Count);
+        CollectionAssert.AreEqual(new List<string> { "值" }, result["键名"]);
+        CollectionAssert.AreEqual(new List<string> { "test" }, result["αβγ"]);
+    }
+
+    /// <summary>
+    /// Test Parse with special characters in key name
+    /// </summary>
+    [TestMethod]
+    public void Parse_EdgeCase_SpecialCharsInKey_TreatedCorrectly()
+    {
+        var result = CmdParameterParser.Parse(new[] { "-key_name", "value1", "-key-name", "value2", "-key.name", "value3" });
+        Assert.AreEqual(3, result.Count);
+        CollectionAssert.AreEqual(new List<string> { "value1" }, result["key_name"]);
+        CollectionAssert.AreEqual(new List<string> { "value2" }, result["key-name"]);
+        CollectionAssert.AreEqual(new List<string> { "value3" }, result["key.name"]);
+    }
+
+    /// <summary>
+    /// Test Parse with very long key name (stress test)
+    /// </summary>
+    [TestMethod]
+    public void Parse_EdgeCase_VeryLongKeyName_HandlesCorrectly()
+    {
+        var longKey = "k" + new string('x', 999);
+        var result = CmdParameterParser.Parse(new[] { $"-{longKey}", "value" });
+        Assert.AreEqual(1, result.Count);
+        CollectionAssert.AreEqual(new List<string> { "value" }, result[longKey]);
     }
 
     #endregion

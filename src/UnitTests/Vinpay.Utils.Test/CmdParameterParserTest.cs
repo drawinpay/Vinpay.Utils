@@ -473,15 +473,16 @@ public class CmdParameterParserTest
     }
 
     /// <summary>
-    /// Test Parse with values that look like keys
+    /// Test Parse with values that look like keys are treated as keys
     /// </summary>
     [TestMethod]
-    public void Parse_Array_ValuesLookLikeKeys_TreatedAsValues()
+    public void Parse_Array_ValuesLookLikeKeys_TreatedAsKeys()
     {
         var result = CmdParameterParser.Parse(new[] { "-key", "-value" });
 
-        Assert.AreEqual(1, result.Count);
-        CollectionAssert.AreEqual(new List<string> { "-value" }, result["key"]);
+        Assert.AreEqual(2, result.Count);
+        CollectionAssert.AreEqual(new List<string>(), result["key"]);
+        CollectionAssert.AreEqual(new List<string>(), result["value"]);
     }
 
     /// <summary>

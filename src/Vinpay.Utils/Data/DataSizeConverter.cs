@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Vinpay.Utils
+namespace Vinpay.Utils.Data
 {
     /// <summary>
     /// A util to convert data size.

@@ -1,4 +1,6 @@
-﻿namespace Vinpay.Utils.Test;
+﻿using Vinpay.Utils.Maths;
+
+namespace Vinpay.Utils.Test;
 
 /// <summary>
 /// Unit tests for AngleConverter class

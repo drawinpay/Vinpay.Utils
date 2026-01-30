@@ -1,4 +1,4 @@
-using Vinpay.Utils.Win;
+using Vinpay.Utils.IO;
 
 namespace Vinpay.Utils.Test;
 

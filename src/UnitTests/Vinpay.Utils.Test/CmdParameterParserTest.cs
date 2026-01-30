@@ -1,3 +1,5 @@
+using Vinpay.Utils.General;
+
 namespace Vinpay.Utils.Test;
 
 /// <summary>

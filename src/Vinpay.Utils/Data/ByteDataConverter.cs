@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Vinpay.Utils
+namespace Vinpay.Utils.Data
 {
     /// <summary>
     /// Parse binary data from strings.

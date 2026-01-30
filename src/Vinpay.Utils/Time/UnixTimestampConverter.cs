@@ -1,4 +1,4 @@
-﻿namespace Vinpay.Utils
+﻿namespace Vinpay.Utils.Time
 {
     /// <summary>
     /// A util to convert data between DateTime and unit timestamp.

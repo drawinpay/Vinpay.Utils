@@ -1,4 +1,6 @@
-﻿namespace Vinpay.Utils.Test
+﻿using Vinpay.Utils.Data;
+
+namespace Vinpay.Utils.Test
 {
     [TestClass]
     public class DataSizeConverterTest

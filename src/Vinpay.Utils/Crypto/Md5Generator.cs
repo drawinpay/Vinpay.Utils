@@ -1,7 +1,8 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using Vinpay.Utils.Data;
 
-namespace Vinpay.Utils
+namespace Vinpay.Utils.Crypto
 {
     /// <summary>
     /// A util to calculate MD5 hash.
@@ -32,7 +33,7 @@ namespace Vinpay.Utils
         {
             if (encoding == null) encoding = Encoding.UTF8;
             byte[] inputBytes = encoding.GetBytes(input);
-            return GetMd5Bytes(inputBytes);
+            return inputBytes.GetMd5Bytes();
         }
 
         /// <summary>
@@ -55,7 +56,7 @@ namespace Vinpay.Utils
         public static byte[] GetFileMd5Bytes(this string filePath)
         {
             using FileStream fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            return GetMd5Bytes(fileStream);
+            return fileStream.GetMd5Bytes();
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Vinpay.Utils
         /// <returns>A string for the MD5 value</returns>
         public static string GetMd5String(this byte[] input, string separator = "", bool isLowerCase = true)
         {
-            var hashBytes = GetMd5Bytes(input);
+            var hashBytes = input.GetMd5Bytes();
             var hashString = hashBytes.BytesToHexString(separator, isLowerCase);
             return hashString;
         }
@@ -82,7 +83,7 @@ namespace Vinpay.Utils
         /// <returns>A string for the MD5 value</returns>
         public static string GetMd5String(this string input, Encoding? encoding = null, string separator = "", bool isLowerCase = true)
         {
-            var hashBytes = GetMd5Bytes(input, encoding);
+            var hashBytes = input.GetMd5Bytes(encoding);
             var hashString = hashBytes.BytesToHexString(separator, isLowerCase);
             return hashString;
         }
@@ -96,7 +97,7 @@ namespace Vinpay.Utils
         /// <returns>A string for the MD5 value</returns>
         public static string GetMd5String(this Stream stream, string separator = "", bool isLowerCase = true)
         {
-            var hashBytes = GetMd5Bytes(stream);
+            var hashBytes = stream.GetMd5Bytes();
             var hashString = hashBytes.BytesToHexString(separator, isLowerCase);
             return hashString;
         }
@@ -110,7 +111,7 @@ namespace Vinpay.Utils
         /// <returns>A byte array for the MD5 value</returns>
         public static string GetFileMd5String(this string filePath, string separator = "", bool isLowerCase = true)
         {
-            var hashBytes = GetFileMd5Bytes(filePath);
+            var hashBytes = filePath.GetFileMd5Bytes();
             var hashString = hashBytes.BytesToHexString(separator, isLowerCase);
             return hashString;
         }

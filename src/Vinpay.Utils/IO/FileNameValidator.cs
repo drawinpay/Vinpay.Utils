@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Vinpay.Utils.Win
+namespace Vinpay.Utils.IO
 {
     /// <summary>
     /// A util to deal with file name issues.

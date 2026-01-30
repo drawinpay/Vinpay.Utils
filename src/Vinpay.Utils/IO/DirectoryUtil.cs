@@ -1,4 +1,4 @@
-﻿namespace Vinpay.Utils
+﻿namespace Vinpay.Utils.IO
 {
     /// <summary>
     /// A util class to deal with directory issues.

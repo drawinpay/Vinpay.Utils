@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Vinpay.Utils
+namespace Vinpay.Utils.Assemblies
 {
     /// <summary>
     /// Assembly util.

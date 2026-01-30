@@ -1,4 +1,4 @@
-﻿namespace Vinpay.Utils
+﻿namespace Vinpay.Utils.General
 {
     /// <summary>
     /// Command line parameter parser.

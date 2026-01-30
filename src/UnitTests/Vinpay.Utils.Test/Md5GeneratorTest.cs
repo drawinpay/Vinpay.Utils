@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Vinpay.Utils.Crypto;
 
 namespace Vinpay.Utils.Test
 {

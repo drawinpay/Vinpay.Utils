@@ -1,4 +1,4 @@
-﻿namespace Vinpay.Utils
+﻿namespace Vinpay.Utils.Maths
 {
     /// <summary>
     /// A tool for converting angles and radians to each other
